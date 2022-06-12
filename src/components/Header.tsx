@@ -1,9 +1,9 @@
-import logo from "./images/logo.svg";
+import logo from "../images/logo.svg";
 
-import iconMenu from "./images/icon-menu.svg";
-import iconCart from "./images/icon-cart.svg";
+import iconMenu from "../images/icon-menu.svg";
+import iconCart from "../images/icon-cart.svg";
 
-import imageAvatar from "./images/image-avatar.png";
+import imageAvatar from "../images/image-avatar.png";
 
 export default function Header() {
   return (
