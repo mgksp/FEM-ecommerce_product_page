@@ -1,6 +1,9 @@
+import MobImgCarousel from "./MobImgCarousel";
+
 export default function Main() {
   return (
     <main className="">
+      <MobImgCarousel />
       <div className="p-6">
         <p className="uppercase font-bold tracking-widest text-xs text-orange mb-3">
           Sneaker Company
