@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Header, Main } from "./components";
 
 function App() {
+  const [showCart, setShowCart] = useState<boolean>(false);
   return (
     <>
-      <Header />
+      <Header showCart={showCart} setShowCart={setShowCart} />
       <Main />
     </>
   );
