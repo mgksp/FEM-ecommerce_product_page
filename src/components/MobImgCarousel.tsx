@@ -21,10 +21,8 @@ export default function MobImgCarousel() {
   const handleImgs = (direction: directions) => {
     if (direction === directions.right) {
       if (img >= productImages.length - 1) {
-        console.log("from right");
         setImg(0);
       } else {
-        console.log("from right else");
         setImg((prev) => prev + 1);
       }
     }

@@ -3,8 +3,12 @@ import MobImgCarousel from "./MobImgCarousel";
 import iconPlus from "../images/icon-plus.svg";
 import iconMinus from "../images/icon-minus.svg";
 import { useState } from "react";
+import { Product } from "../models/product";
 
-export default function Main() {
+interface MainProps {
+  product: Product;
+}
+export default function Main({ product }: MainProps) {
   const [quantity, setQuantity] = useState(0);
 
   return (
@@ -12,25 +16,25 @@ export default function Main() {
       <MobImgCarousel />
       <div className="p-6">
         <p className="uppercase font-bold tracking-widest text-xs text-orange mb-3">
-          Sneaker Company
+          {product.brand}
         </p>
         <h1 className="font-bold text-[1.75rem] leading-8 mb-4 text-veryDarkBlue">
-          Fall Limited Edition Sneakers
+          {product.title}
         </h1>
         <p className="text-darkGrayishBlue text-[0.9375rem] mb-7">
-          These low-profile sneakers are your perfect casual wear companion.
-          Featuring a durable rubber outer sole, they'll withstand everything
-          the weather can offer.
+          {product.desc}
         </p>
 
         <div className="flex items-center justify-between mb-6 font-bold">
           <div className="flex items-center gap-4">
             <h2 className=" text-[1.75rem] tracking-[1px] text-veryDarkBlue">
-              $125.00
+              ${product.price * (product.discount / 100)}
             </h2>
-            <p className="text-orange bg-paleOrange rounded px-1">50%</p>
+            <p className="text-orange bg-paleOrange rounded px-1">
+              {product.discount}%
+            </p>
           </div>
-          <p className="line-through text-grayishBlue">$250.00</p>
+          <p className="line-through text-grayishBlue">${product.price}</p>
         </div>
 
         <div className="flex flex-col gap-4">
