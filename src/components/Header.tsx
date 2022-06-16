@@ -32,16 +32,34 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
 
   return (
     <div className="">
-      <header className="px-6 py-5 flex items-center justify-between">
-        <div className="flex gap-4 items-center">
-          <button className="" aria-label="menu button">
+      <header className="px-6 py-5 flex items-center justify-between md:py-7 md:px-0">
+        <div className="flex gap-4 items-center md:gap-14">
+          <button className="md:hidden" aria-label="menu button">
             <img src={iconMenu} alt="" />
           </button>
           <div className="w-[8.625rem]">
             <img src={logo} alt="" />
           </div>
+
+          <nav className="hidden md:flex text-darkGrayishBlue text-[0.9375rem] gap-8">
+            <a href="/" className="">
+              Collections
+            </a>
+            <a href="/" className="">
+              Men
+            </a>
+            <a href="/" className="">
+              Women
+            </a>
+            <a href="/" className="">
+              About
+            </a>
+            <a href="/" className="">
+              Contact
+            </a>
+          </nav>
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 md:gap-10">
           <button
             className=""
             aria-label="cart button"
@@ -57,7 +75,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
               />
             </svg>
           </button>
-          <div className="rounded-full w-6">
+          <div className="rounded-full w-6 md:w-12">
             <img src={imageAvatar} alt="" />
           </div>
         </div>

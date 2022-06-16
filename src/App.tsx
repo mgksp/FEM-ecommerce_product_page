@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <Header showCart={showCart} setShowCart={setShowCart} />
+      <hr className="hidden md:block mb-20" />
       <Main product={Products[0]} />
     </>
   );
