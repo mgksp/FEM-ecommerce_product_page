@@ -7,7 +7,7 @@ export default function DesktopImgGallery() {
   const [selectedImg, setSelectedImg] = useState<number>(0);
 
   return (
-    <div className="">
+    <div className="hidden md:block">
       <div
         className="mb-7 rounded-xl overflow-hidden cursor-pointer"
         onClick={() => setShowImg(true)}

@@ -32,7 +32,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
 
   return (
     <div className="">
-      <header className="px-6 py-5 flex items-center justify-between md:py-7 md:px-0">
+      <header className="px-6 py-5 flex items-center justify-between md:py-0 md:px-0">
         <div className="flex gap-4 items-center md:gap-14">
           <button className="md:hidden" aria-label="menu button">
             <img src={iconMenu} alt="" />
@@ -42,21 +42,36 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
           </div>
 
           <nav className="hidden md:flex text-darkGrayishBlue text-[0.9375rem] gap-8">
-            <a href="/" className="">
-              Collections
-            </a>
-            <a href="/" className="">
-              Men
-            </a>
-            <a href="/" className="">
-              Women
-            </a>
-            <a href="/" className="">
-              About
-            </a>
-            <a href="/" className="">
-              Contact
-            </a>
+            <div className="relative py-7 ">
+              <a href="/" className="[&+div]:hover:bg-orange">
+                Collections
+              </a>
+              <div className="absolute bottom-0 h-[2px] w-full"></div>
+            </div>
+            <div className="relative py-7 ">
+              <a href="/" className="[&+div]:hover:bg-orange">
+                Men
+              </a>
+              <div className="absolute bottom-0 h-[2px] w-full"></div>
+            </div>
+            <div className="relative py-7 ">
+              <a href="/" className="[&+div]:hover:bg-orange">
+                Women
+              </a>
+              <div className="absolute bottom-0 h-[2px] w-full"></div>
+            </div>
+            <div className="relative py-7 ">
+              <a href="/" className="[&+div]:hover:bg-orange">
+                About
+              </a>
+              <div className="absolute bottom-0 h-[2px] w-full"></div>
+            </div>
+            <div className="relative py-7 ">
+              <a href="/" className="[&+div]:hover:bg-orange">
+                Contact
+              </a>
+              <div className="absolute bottom-0 h-[2px] w-full"></div>
+            </div>
           </nav>
         </div>
         <div className="flex items-center gap-5 md:gap-10">
@@ -75,7 +90,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
               />
             </svg>
           </button>
-          <div className="rounded-full w-6 md:w-12">
+          <div className="rounded-full overflow-hidden cursor-pointer w-6 md:w-12 hover:border-2 border-orange">
             <img src={imageAvatar} alt="" />
           </div>
         </div>
@@ -83,7 +98,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
 
       {showCart && (
         <div className="relative">
-          <div className="absolute right-0 top-2 z-50 w-full grid place-items-center px-2">
+          <div className="absolute right-0 top-2 z-50 w-full grid place-items-center px-2 max-w-[22.5rem]">
             <div
               ref={node}
               className="bg-white rounded-lg w-full min-h-[16rem] shadow-xl"
