@@ -16,6 +16,7 @@ function App() {
         showCart={showCart}
         setShowCart={setShowCart}
         cartItems={cartItems}
+        setCartItems={setCartItems}
       />
       <hr className="hidden md:block mb-20" />
       <Main product={Products[0]} setCartItems={setCartItems} />

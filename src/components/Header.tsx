@@ -11,11 +11,15 @@ interface HeaderProps {
   showCart: boolean;
   setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
   cartItems: { product: Product; quantity: number }[];
+  setCartItems: React.Dispatch<
+    React.SetStateAction<{ product: Product; quantity: number }[]>
+  >;
 }
 export default function Header({
   showCart,
   setShowCart,
   cartItems,
+  setCartItems,
 }: HeaderProps) {
   const node = useRef<HTMLDivElement>(null);
 
@@ -36,6 +40,11 @@ export default function Header({
       document.removeEventListener("mousedown", closeNavMenu);
     };
   }, [showCart]);
+
+  const handleRemoveItem = (itemIndex: number) => {
+    const filteredItems = cartItems.filter((_, idx) => idx !== itemIndex);
+    setCartItems(filteredItems);
+  };
 
   return (
     <div className="">
@@ -148,7 +157,10 @@ export default function Header({
                             </span>
                           </p>
                         </div>
-                        <button className="">
+                        <button
+                          className=""
+                          onClick={() => handleRemoveItem(idx)}
+                        >
                           <img
                             className="w-4 h-4"
                             src={iconDelete}
