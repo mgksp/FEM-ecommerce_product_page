@@ -4,6 +4,7 @@ import iconPlus from "../images/icon-plus.svg";
 import iconMinus from "../images/icon-minus.svg";
 import { useState } from "react";
 import { Product } from "../models/product";
+import DesktopImgGallery from "./DesktopImgGallery";
 
 interface MainProps {
   product: Product;
@@ -12,10 +13,12 @@ export default function Main({ product }: MainProps) {
   const [quantity, setQuantity] = useState(0);
 
   return (
-    <main className="md:grid grid-cols-2 md:px-12">
+    <main className="md:grid grid-cols-2 place-items-center gap-32 md:px-12">
       <MobImgCarousel />
+      <DesktopImgGallery />
+
       <div className="">
-        <div className="p-6 md:py-0">
+        <div className="p-6 md:p-0">
           <p className="uppercase font-bold tracking-widest text-xs text-orange mb-3 md:text-[0.8125rem] md:mb-5">
             {product.brand}
           </p>

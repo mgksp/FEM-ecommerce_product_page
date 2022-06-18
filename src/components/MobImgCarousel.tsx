@@ -36,7 +36,7 @@ export default function MobImgCarousel() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative md:hidden">
       <div className="h-[18.75rem]">
         <img
           className="h-full w-full object-cover object-center"
