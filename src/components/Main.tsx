@@ -1,23 +1,25 @@
+import React, { useContext, useState } from "react";
+
 import MobImgCarousel from "./MobImgCarousel";
+import DesktopImgGallery from "./DesktopImgGallery";
+
+import { cartContext } from "../utilities/CartContext";
+import { Product } from "../models/product";
 
 import iconPlus from "../images/icon-plus.svg";
 import iconMinus from "../images/icon-minus.svg";
-import React, { useState } from "react";
-import { Product } from "../models/product";
-import DesktopImgGallery from "./DesktopImgGallery";
 
 interface MainProps {
   product: Product;
-  setCartItems: React.Dispatch<
-    React.SetStateAction<{ product: Product; quantity: number }[]>
-  >;
 }
-export default function Main({ product, setCartItems }: MainProps) {
+export default function Main({ product }: MainProps) {
+  const cart = useContext(cartContext);
+
   const [quantity, setQuantity] = useState(0);
 
   const handleAddItemToCart = () => {
     if (quantity > 0) {
-      setCartItems((prev) => [...prev, { product, quantity }]);
+      cart!.setCartItems((prev) => [...prev, { product, quantity }]);
       setQuantity(0);
     }
     return;
@@ -85,7 +87,9 @@ export default function Main({ product, setCartItems }: MainProps) {
 
             <button
               className="text-white bg-orange flex items-center justify-center gap-2 py-4 rounded-lg font-bold md:flex-[3] btn-shadow"
-              onClick={handleAddItemToCart}
+              onClick={() => {
+                handleAddItemToCart();
+              }}
             >
               <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg">
                 <path
