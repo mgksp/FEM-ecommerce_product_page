@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { cartContext } from "../utilities/CartContext";
 
 import logo from "../images/logo.svg";
 import iconMenu from "../images/icon-menu.svg";
 import iconDelete from "../images/icon-delete.svg";
+import iconClose from "../images/icon-close.svg";
 
 import imageAvatar from "../images/image-avatar.png";
-import { cartContext } from "../utilities/CartContext";
 
 interface HeaderProps {
   showCart: boolean;
@@ -13,7 +14,10 @@ interface HeaderProps {
 }
 export default function Header({ showCart, setShowCart }: HeaderProps) {
   const cart = useContext(cartContext);
+
   const node = useRef<HTMLDivElement>(null);
+
+  const [showMobNav, setShowMobNav] = useState<boolean>(false);
 
   useEffect(() => {
     let q: number = 0;
@@ -46,9 +50,16 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
     <div className="">
       <header className="px-6 py-5 flex items-center justify-between md:py-0 md:px-0">
         <div className="flex gap-4 items-center md:gap-14">
-          <button className="md:hidden" aria-label="menu button">
+          <button
+            className="md:hidden"
+            onClick={() => setShowMobNav(true)}
+            aria-label="menu button"
+          >
             <img src={iconMenu} alt="" />
           </button>
+
+          {showMobNav && <MobNav setShowMobNav={setShowMobNav} />}
+
           <div className="w-[8.625rem]">
             <img src={logo} alt="" />
           </div>
@@ -188,3 +199,33 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
     </div>
   );
 }
+
+interface MobNavProps {
+  setShowMobNav: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const MobNav = ({ setShowMobNav }: MobNavProps) => {
+  return (
+    <div
+      className="absolute left-0 top-0 z-50 w-full bg-blackOp75 md:hidden"
+      style={{ height: document.body.clientHeight }}
+    >
+      <div className="bg-white h-full w-9/12 p-6">
+        <button
+          className="mb-14"
+          aria-label="close button"
+          onClick={() => setShowMobNav(false)}
+        >
+          <img src={iconClose} alt="" />
+        </button>
+
+        <nav className="grid gap-6 font-bold text-lg text-veryDarkBlue">
+          <a href="/">Collections</a>
+          <a href="">Men</a>
+          <a href="">Women</a>
+          <a href="">About</a>
+          <a href="">Contact</a>
+        </nav>
+      </div>
+    </div>
+  );
+};

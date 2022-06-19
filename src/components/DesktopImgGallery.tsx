@@ -98,7 +98,7 @@ const EnlargedImg = ({
   };
 
   return (
-    <div className="absolute inset-0 w-full h-full bg-blackOp75 grid place-content-center">
+    <div className="absolute z-50 inset-0 w-full h-full bg-blackOp75 grid place-content-center">
       <div ref={node} className="relative">
         <button
           className="absolute right-0 -top-6"

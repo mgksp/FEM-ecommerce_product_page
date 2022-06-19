@@ -37,14 +37,14 @@ export default function MobImgCarousel() {
 
   return (
     <div className="relative md:hidden">
-      <div className="h-[18.75rem]">
+      <div className="z-0 h-[18.75rem]">
         <img
           className="h-full w-full object-cover object-center"
           src={productImages[img]}
           alt=""
         />
       </div>
-      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full px-4 flex items-center justify-between">
+      <div className="absolute z-10 top-1/2 -translate-y-1/2 left-0 w-full px-4 flex items-center justify-between">
         <button
           className="rounded-full bg-white w-10 h-10 grid place-items-center"
           onClick={() => handleImgs(directions.left)}
