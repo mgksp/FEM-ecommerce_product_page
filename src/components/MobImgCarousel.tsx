@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { directions } from "../utilities/enums";
+
 import imageProduct1 from "../images/image-product-1.jpg";
 import imageProduct2 from "../images/image-product-2.jpg";
 import imageProduct3 from "../images/image-product-3.jpg";
@@ -5,8 +8,6 @@ import imageProduct4 from "../images/image-product-4.jpg";
 
 import iconNext from "../images/icon-next.svg";
 import iconPrevious from "../images/icon-previous.svg";
-import { useState } from "react";
-import { directions } from "../utilities/enums";
 
 export default function MobImgCarousel() {
   const [img, setImg] = useState<number>(0);

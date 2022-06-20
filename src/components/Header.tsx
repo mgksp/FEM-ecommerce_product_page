@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { cartContext } from "../utilities/CartContext";
-import useClickOutsideToClose from "../hooks/useClickOutsideToClose";
 
 import logo from "../images/logo.svg";
 import iconMenu from "../images/icon-menu.svg";
-import iconDelete from "../images/icon-delete.svg";
 import iconClose from "../images/icon-close.svg";
 
 import imageAvatar from "../images/image-avatar.png";
@@ -21,18 +19,11 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
 
   const [showMobNav, setShowMobNav] = useState<boolean>(false);
 
-  const node = useClickOutsideToClose(showCart, setShowCart);
-
   useEffect(() => {
     let q: number = 0;
     cart?.cartItems.forEach((item) => (q += item.quantity));
     cart?.setTotalCartItems(q);
   }, [cart!.cartItems]);
-
-  const handleRemoveItem = (itemIndex: number) => {
-    const filteredItems = cart!.cartItems.filter((_, idx) => idx !== itemIndex);
-    cart!.setCartItems(filteredItems);
-  };
 
   return (
     <div className="">
