@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Products } from "../data/products";
+import useClickOutsideToClose from "../hooks/useClickOutsideToClose";
 import { directions } from "../utilities/enums";
 
 export default function DesktopImgGallery() {
@@ -60,25 +61,7 @@ const EnlargedImg = ({
   selectedImg,
   setSelectedImg,
 }: EnlargedImgProps) => {
-  const node = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function closeNavMenu(evt: MouseEvent) {
-      if (
-        showImg &&
-        node.current &&
-        !node.current.contains(evt.target as Node)
-      ) {
-        setShowImg!(false);
-      }
-    }
-
-    document.addEventListener("mousedown", closeNavMenu);
-
-    return () => {
-      document.removeEventListener("mousedown", closeNavMenu);
-    };
-  }, [showImg]);
+  const node = useClickOutsideToClose(showImg, setShowImg);
 
   const handleImgs = (direction: directions) => {
     if (direction === directions.right) {
@@ -122,7 +105,7 @@ const EnlargedImg = ({
             <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M11 1 3 9l8 8"
-                stroke-width="3"
+                strokeWidth="3"
                 fill="none"
                 fillRule="evenodd"
               />
@@ -135,7 +118,7 @@ const EnlargedImg = ({
             <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="m2 1 8 8-8 8"
-                stroke-width="3"
+                strokeWidth="3"
                 fill="none"
                 fillRule="evenodd"
               />
@@ -152,6 +135,7 @@ const EnlargedImg = ({
         <div className="flex justify-center items-center gap-7 mt-10">
           {Products[0].thumbnails.map((img, idx) => (
             <div
+              key={idx}
               className={
                 selectedImg === idx
                   ? "w-[5.5rem] rounded-lg overflow-hidden border-2 border-orange bg-paleOrange cursor-pointer"

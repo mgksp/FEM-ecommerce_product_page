@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { cartContext } from "../utilities/CartContext";
+import useClickOutsideToClose from "../hooks/useClickOutsideToClose";
 
 import logo from "../images/logo.svg";
 import iconMenu from "../images/icon-menu.svg";
@@ -15,31 +16,15 @@ interface HeaderProps {
 export default function Header({ showCart, setShowCart }: HeaderProps) {
   const cart = useContext(cartContext);
 
-  const node = useRef<HTMLDivElement>(null);
-
   const [showMobNav, setShowMobNav] = useState<boolean>(false);
+
+  const node = useClickOutsideToClose(showCart, setShowCart);
 
   useEffect(() => {
     let q: number = 0;
     cart?.cartItems.forEach((item) => (q += item.quantity));
     cart?.setTotalCartItems(q);
-
-    function closeNavMenu(evt: MouseEvent) {
-      if (
-        showCart &&
-        node.current &&
-        !node.current.contains(evt.target as Node)
-      ) {
-        setShowCart!(false);
-      }
-    }
-
-    document.addEventListener("mousedown", closeNavMenu);
-
-    return () => {
-      document.removeEventListener("mousedown", closeNavMenu);
-    };
-  }, [showCart, cart!.cartItems]);
+  }, [cart!.cartItems]);
 
   const handleRemoveItem = (itemIndex: number) => {
     const filteredItems = cart!.cartItems.filter((_, idx) => idx !== itemIndex);
