@@ -35,7 +35,7 @@ export default function Main({ product }: MainProps) {
           <p className="uppercase font-bold tracking-widest text-xs text-orange mb-3 md:text-[0.8125rem] md:mb-5">
             {product.brand}
           </p>
-          <h1 className="font-bold text-[1.75rem] leading-8 mb-4 text-veryDarkBlue md:text-[2.75rem] md:leading-[3rem]">
+          <h1 className="font-bold text-[1.75rem] leading-8 mb-4 text-veryDarkBlue md:text-[2.75rem] md:leading-[3rem] md:mb-10">
             {product.title}
           </h1>
           <p className="text-darkGrayishBlue text-[0.9375rem] mb-7 md:text-base md:leading-[1.625rem]">
