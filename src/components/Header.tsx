@@ -50,36 +50,16 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
           </div>
 
           <nav className="hidden md:flex text-darkGrayishBlue text-[0.9375rem] gap-8">
-            <div className="relative py-7 ">
-              <a href="/" className="[&+div]:hover:bg-orange">
-                Collections
-              </a>
-              <div className="absolute bottom-0 h-[2px] w-full"></div>
-            </div>
-            <div className="relative py-7 ">
-              <a href="/" className="[&+div]:hover:bg-orange">
-                Men
-              </a>
-              <div className="absolute bottom-0 h-[2px] w-full"></div>
-            </div>
-            <div className="relative py-7 ">
-              <a href="/" className="[&+div]:hover:bg-orange">
-                Women
-              </a>
-              <div className="absolute bottom-0 h-[2px] w-full"></div>
-            </div>
-            <div className="relative py-7 ">
-              <a href="/" className="[&+div]:hover:bg-orange">
-                About
-              </a>
-              <div className="absolute bottom-0 h-[2px] w-full"></div>
-            </div>
-            <div className="relative py-7 ">
-              <a href="/" className="[&+div]:hover:bg-orange">
-                Contact
-              </a>
-              <div className="absolute bottom-0 h-[2px] w-full"></div>
-            </div>
+            {["Collections", "Men", "Women", "About", "Contact"].map(
+              (navItem) => (
+                <div className="relative py-7 ">
+                  <a href="/" className="[&+div]:hover:bg-orange">
+                    {navItem}
+                  </a>
+                  <div className="absolute bottom-0 h-[2px] w-full"></div>
+                </div>
+              )
+            )}
           </nav>
         </div>
         <div className="flex items-center gap-5 md:gap-10">
