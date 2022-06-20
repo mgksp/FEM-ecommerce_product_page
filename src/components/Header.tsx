@@ -48,7 +48,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
           <nav className="hidden md:flex text-darkGrayishBlue text-[0.9375rem] gap-8">
             {["Collections", "Men", "Women", "About", "Contact"].map(
               (navItem) => (
-                <div key={navItem} className="relative py-7 ">
+                <div key={navItem} className="relative py-10">
                   <a href="/" className="[&+div]:hover:bg-orange">
                     {navItem}
                   </a>

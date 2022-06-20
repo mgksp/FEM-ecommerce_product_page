@@ -70,6 +70,7 @@ export default function Main({ product }: MainProps) {
               </button>
 
               <input
+                aria-label="quantity"
                 type="number"
                 value={quantity}
                 readOnly
