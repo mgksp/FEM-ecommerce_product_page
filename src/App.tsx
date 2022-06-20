@@ -20,6 +20,25 @@ function App() {
         <Header showCart={showCart} setShowCart={setShowCart} />
         <hr className="hidden md:block mb-20" />
         <Main product={Products[0]} />
+        <footer className="absolute bottom-0 left-0 py-1 text-xs font-medium text-veryDarkBlue w-full text-center">
+          Challenge by{" "}
+          <a
+            className="text-sm text-orange font-bold"
+            href="https://www.frontendmentor.io?ref=challenge"
+            target="_blank"
+          >
+            Frontend Mentor
+          </a>
+          . Coded by{" "}
+          <a
+            className="text-sm text-orange font-bold"
+            href="https://www.github.com/mgksp"
+            target="_blank"
+          >
+            Prabu
+          </a>
+          .
+        </footer>
       </>
     </cartContext.Provider>
   );
