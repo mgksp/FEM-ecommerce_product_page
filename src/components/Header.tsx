@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { cartContext } from "../utilities/CartContext";
 import useClickOutsideToClose from "../hooks/useClickOutsideToClose";
 
@@ -43,7 +45,9 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
             <img src={iconMenu} alt="" />
           </button>
 
-          {showMobNav && <MobNav setShowMobNav={setShowMobNav} />}
+          <AnimatePresence initial={false} exitBeforeEnter={true}>
+            {showMobNav && <MobNav setShowMobNav={setShowMobNav} />}
+          </AnimatePresence>
 
           <div className="w-[8.625rem]">
             <img src={logo} alt="" />
@@ -52,7 +56,7 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
           <nav className="hidden md:flex text-darkGrayishBlue text-[0.9375rem] gap-8">
             {["Collections", "Men", "Women", "About", "Contact"].map(
               (navItem) => (
-                <div className="relative py-7 ">
+                <div key={navItem} className="relative py-7 ">
                   <a href="/" className="[&+div]:hover:bg-orange">
                     {navItem}
                   </a>
@@ -93,74 +97,79 @@ export default function Header({ showCart, setShowCart }: HeaderProps) {
         </div>
       </header>
 
-      {showCart && (
-        <div className="relative">
-          <div className="absolute right-0 top-2 z-50 grid justify-end items-center px-2">
-            <div
-              ref={node}
-              className="bg-white rounded-lg min-h-[16rem] shadow-xl w-[22.5rem]"
-            >
-              <div className="p-6 font-bold text-veryDarkBlue">Cart</div>
-              <hr />
-              {cart!.cartItems.length <= 0 ? (
-                <div className="p-6 grid w-full place-content-center text-darkGrayishBlue h-[11.75rem] font-bold">
-                  Your cart is empty.
-                </div>
-              ) : (
-                <div className="grid gap-6 p-6">
-                  {cart!.cartItems.map((cartItem, idx) => {
-                    const priceAfterDiscount =
-                      (cartItem.product.price * cartItem.product.discount) /
-                      100;
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {showCart && (
+          <div className="relative">
+            <div className="absolute right-0 top-2 z-50 grid justify-end items-center px-2">
+              <motion.div
+                initial={{ opacity: 0, y: -25 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10, transition: { duration: 0.15 } }}
+                ref={node}
+                className="bg-white rounded-lg min-h-[16rem] shadow-xl w-[22.5rem]"
+              >
+                <div className="p-6 font-bold text-veryDarkBlue">Cart</div>
+                <hr />
+                {cart!.cartItems.length <= 0 ? (
+                  <div className="p-6 grid w-full place-content-center text-darkGrayishBlue h-[11.75rem] font-bold">
+                    Your cart is empty.
+                  </div>
+                ) : (
+                  <div className="grid gap-6 p-6">
+                    {cart!.cartItems.map((cartItem, idx) => {
+                      const priceAfterDiscount =
+                        (cartItem.product.price * cartItem.product.discount) /
+                        100;
 
-                    return (
-                      <div
-                        key={idx}
-                        className="grid grid-cols-[max-content_minmax(0,_1fr)_max-content] gap-4 text-darkGrayishBlue"
-                      >
-                        <img
-                          className="w-12 rounded"
-                          src={cartItem.product.thumbnails[0]}
-                          alt=""
-                        />
-                        <div className="">
-                          <p className="overflow-ellipsis whitespace-nowrap overflow-hidden">
-                            {cartItem.product.title}
-                          </p>
-                          <p className="overflow-ellipsis">
-                            ${priceAfterDiscount.toFixed(2)} x{" "}
-                            {cartItem.quantity}{" "}
-                            <span className="font-bold text-veryDarkBlue">
-                              $
-                              {(priceAfterDiscount * cartItem.quantity).toFixed(
-                                2
-                              )}
-                            </span>
-                          </p>
-                        </div>
-                        <button
-                          className=""
-                          onClick={() => handleRemoveItem(idx)}
+                      return (
+                        <div
+                          key={idx}
+                          className="grid grid-cols-[max-content_minmax(0,_1fr)_max-content] gap-4 text-darkGrayishBlue"
                         >
                           <img
-                            className="w-4 h-4"
-                            src={iconDelete}
+                            className="w-12 rounded"
+                            src={cartItem.product.thumbnails[0]}
                             alt=""
-                            aria-label="delete button"
                           />
-                        </button>
-                      </div>
-                    );
-                  })}
-                  <button className="bg-orange text-white font-bold py-5 rounded-lg">
-                    Checkout
-                  </button>
-                </div>
-              )}
+                          <div className="">
+                            <p className="overflow-ellipsis whitespace-nowrap overflow-hidden">
+                              {cartItem.product.title}
+                            </p>
+                            <p className="overflow-ellipsis">
+                              ${priceAfterDiscount.toFixed(2)} x{" "}
+                              {cartItem.quantity}{" "}
+                              <span className="font-bold text-veryDarkBlue">
+                                $
+                                {(
+                                  priceAfterDiscount * cartItem.quantity
+                                ).toFixed(2)}
+                              </span>
+                            </p>
+                          </div>
+                          <button
+                            className=""
+                            onClick={() => handleRemoveItem(idx)}
+                          >
+                            <img
+                              className="w-4 h-4"
+                              src={iconDelete}
+                              alt=""
+                              aria-label="delete button"
+                            />
+                          </button>
+                        </div>
+                      );
+                    })}
+                    <button className="bg-orange text-white font-bold py-5 rounded-lg">
+                      Checkout
+                    </button>
+                  </div>
+                )}
+              </motion.div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -170,11 +179,20 @@ interface MobNavProps {
 }
 const MobNav = ({ setShowMobNav }: MobNavProps) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.125 }}
       className="absolute left-0 top-0 z-50 w-full bg-blackOp75 md:hidden"
       style={{ height: document.body.clientHeight }}
     >
-      <div className="bg-white h-full w-9/12 p-6">
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: "75%" }}
+        exit={{ width: 0 }}
+        className="bg-white h-full p-6"
+      >
         <button
           className="mb-14"
           aria-label="close button"
@@ -190,7 +208,7 @@ const MobNav = ({ setShowMobNav }: MobNavProps) => {
           <a href="">About</a>
           <a href="">Contact</a>
         </nav>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

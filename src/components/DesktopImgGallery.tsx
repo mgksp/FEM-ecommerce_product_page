@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Products } from "../data/products";
 import useClickOutsideToClose from "../hooks/useClickOutsideToClose";
 import { directions } from "../utilities/enums";
@@ -28,7 +29,9 @@ export default function DesktopImgGallery() {
           >
             <img
               className={
-                selectedImg === idx ? "opacity-40" : "hover:opacity-60"
+                selectedImg === idx
+                  ? "opacity-40"
+                  : "hover:opacity-60 transition-opacity ease-in duration-150"
               }
               src={img}
               alt=""
@@ -37,14 +40,16 @@ export default function DesktopImgGallery() {
         ))}
       </div>
 
-      {showImg && (
-        <EnlargedImg
-          showImg={showImg}
-          setShowImg={setShowImg}
-          selectedImg={selectedImg}
-          setSelectedImg={setSelectedImg}
-        />
-      )}
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {showImg && (
+          <EnlargedImg
+            showImg={showImg}
+            setShowImg={setShowImg}
+            selectedImg={selectedImg}
+            setSelectedImg={setSelectedImg}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -81,8 +86,19 @@ const EnlargedImg = ({
   };
 
   return (
-    <div className="absolute z-50 inset-0 w-full h-full bg-blackOp75 grid place-content-center">
-      <div ref={node} className="relative">
+    <motion.div
+      initial={{ backgroundColor: "rgb(0, 0, 0 / 0)" }}
+      animate={{ backgroundColor: "rgb(0, 0, 0 / 0.75)" }}
+      exit={{ backgroundColor: "rgb(0, 0, 0 / 0)" }}
+      className="absolute z-50 inset-0 w-full h-full grid place-content-center"
+    >
+      <motion.div
+        initial={{ y: "-100vh", opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ x: "-100vw", opacity: 0 }}
+        ref={node}
+        className="relative"
+      >
         <button
           className="absolute right-0 -top-6"
           aria-label="close button"
@@ -145,7 +161,9 @@ const EnlargedImg = ({
             >
               <img
                 className={
-                  selectedImg === idx ? "opacity-40" : "hover:opacity-60"
+                  selectedImg === idx
+                    ? "opacity-40"
+                    : "hover:opacity-60 transition-opacity ease-in duration-150"
                 }
                 src={img}
                 alt=""
@@ -153,7 +171,7 @@ const EnlargedImg = ({
             </div>
           ))}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

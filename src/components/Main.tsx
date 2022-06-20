@@ -86,7 +86,7 @@ export default function Main({ product }: MainProps) {
             </div>
 
             <button
-              className="text-white bg-orange flex items-center justify-center gap-2 py-4 rounded-lg font-bold md:flex-[3] btn-shadow"
+              className="text-white bg-orange flex items-center justify-center gap-2 py-4 rounded-lg font-bold md:flex-[3] btn-shadow hover:opacity-70 transition-opacity duration-150 ease-in"
               onClick={() => {
                 handleAddItemToCart();
               }}
